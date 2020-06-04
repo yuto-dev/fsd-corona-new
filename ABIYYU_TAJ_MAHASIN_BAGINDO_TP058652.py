@@ -73,17 +73,20 @@ def getStatPatient():
         if newContent[7] != "N":
             totalTest = totalTest + 1
         if newContent[8] != "N":
-            totalTest = totalTest + 1        
-        
-        
+            totalTest = totalTest + 1    
 
+        if newContent[10] == "R":
+            patientRecovered = patientRecovered + 1        
+        
         counter = counter+1
 
     totalTest = str(totalTest)
     patientTested = str(patientTested)
+    patientRecovered = str(patientRecovered)
 
     print("Total tests : " + totalTest)
     print("Tested patients : " + patientTested)
+    print("Patient recovered : " + patientRecovered)
 
     
 
