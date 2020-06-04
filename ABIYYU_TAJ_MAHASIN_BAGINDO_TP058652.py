@@ -32,7 +32,7 @@ def menu():
 
 
 def registerPatient():
-    
+    # This module registers patients
     patientName = input("Enter patient name: ")
     patientID = input("Enter patient ID: ")
     patientMail = input("Enter patient email: ")
@@ -50,14 +50,51 @@ def registerPatient():
 
     with open("patient.txt", "a") as f:
         print(patientData, file = f)
+
+    print("Return to menu?")
+    print("1. Return to menu")
+    print("2. Exit")
+    exitOption = input("Choose option: ")
+
+    if exitOption == "1":
+        menu()
+    elif exitOption == "2":
+        print("Goodbye and have a nice day.")
+    else:
+        print("You entered the wrong option but goodbye and have a nice day. ;)")    
     
 def testPatient():
-    print("b")
+    # This module handles all testing
+    my_file = open("patient.txt", "r")
+    content = my_file.readlines()
 
+    patientID = input("Enter patient ID: ")
+
+    counter = 0
+
+    for element in content:
+        newContent = content[counter].split(";")
+        del newContent[-1]
+        #print(newContent)
+
+        if newContent[1] == patientID:
+            print("Testing patient " + newContent[0])
+
+            break
+
+        else:
+            print("Patient not found")
+            break    
+
+        counter = counter + 1
+
+    my_file.close()
+    
 def modifyPatient():
     print("c")
 
 def getStatPatient():
+    #This module displays the requested statistics
     my_file = open("patient.txt", "r")
     content = my_file.readlines()
     print(content)
@@ -81,7 +118,7 @@ def getStatPatient():
     ActiveCaseZoneC = 0
     ActiveCaseZoneD = 0
 
-    for ele in content:
+    for element in content:
         newContent = content[counter].split(";")
         del newContent[-1]
         print(newContent)
@@ -134,16 +171,16 @@ def getStatPatient():
         if newContent[3] == "AHS" and newContent[8] == "1":
             patientPositiveGroupAHS = patientPositiveGroupAHS + 1   
 
-        if newContent[4] == "A" and newContent[9] != "0":
+        if newContent[4] == "A" and newContent[10] == "A":
             ActiveCaseZoneA = ActiveCaseZoneA + 1     
 
-        if newContent[4] == "B" and newContent[9] != "0":
+        if newContent[4] == "B" and newContent[10] == "A":
             ActiveCaseZoneB = ActiveCaseZoneB + 1 
 
-        if newContent[4] == "C" and newContent[9] != "0":
+        if newContent[4] == "C" and newContent[10] == "A":
             ActiveCaseZoneC = ActiveCaseZoneC + 1 
 
-        if newContent[4] == "D" and newContent[9] != "0":
+        if newContent[4] == "D" and newContent[10] == "A":
             ActiveCaseZoneD = ActiveCaseZoneD + 1                      
                     
         
@@ -186,6 +223,18 @@ def getStatPatient():
     print("")
 
     my_file.close()
+
+    print("Return to menu?")
+    print("1. Return to menu")
+    print("2. Exit")
+    exitOption = input("Choose option: ")
+
+    if exitOption == "1":
+        menu()
+    elif exitOption == "2":
+        print("Goodbye and have a nice day.")
+    else:
+        print("You entered the wrong option but goodbye and have a nice day. ;)")
 
 def searchPatient():
     print("e")    
