@@ -55,9 +55,17 @@ def getStatPatient():
     counter = 0
 
     totalTest = 0
+
     patientTested = 0
+
     patientRecovered = 0
-    patientPositiveGroup = 0
+
+    patientPositiveGroupATO = 0
+    patientPositiveGroupACC = 0
+    patientPositiveGroupAEO = 0
+    patientPositiveGroupSID = 0
+    patientPositiveGroupAHS = 0
+
     ActiveZoneCase = 0
 
     for ele in content:
@@ -76,23 +84,68 @@ def getStatPatient():
             totalTest = totalTest + 1    
 
         if newContent[10] == "R":
-            patientRecovered = patientRecovered + 1        
+            patientRecovered = patientRecovered + 1       
+
+        if newContent[3] == "ATO" and newContent[6] == "1":
+            patientPositiveGroupATO = patientPositiveGroupATO + 1
+        if newContent[3] == "ATO" and newContent[7] == "1":
+            patientPositiveGroupATO = patientPositiveGroupATO + 1
+        if newContent[3] == "ATO" and newContent[8] == "1":
+            patientPositiveGroupATO = patientPositiveGroupATO + 1
+
+        if newContent[3] == "ACC" and newContent[6] == "1":
+            patientPositiveGroupACC = patientPositiveGroupACC + 1
+        if newContent[3] == "ACC" and newContent[7] == "1":
+            patientPositiveGroupACC = patientPositiveGroupACC + 1
+        if newContent[3] == "ACC" and newContent[8] == "1":
+            patientPositiveGroupACC = patientPositiveGroupACC + 1
+
+        if newContent[3] == "AEO" and newContent[6] == "1":
+            patientPositiveGroupAEO = patientPositiveGroupAEO + 1
+        if newContent[3] == "AEO" and newContent[7] == "1":
+            patientPositiveGroupAEO = patientPositiveGroupAEO + 1
+        if newContent[3] == "AEO" and newContent[8] == "1":
+            patientPositiveGroupAEO = patientPositiveGroupAEO + 1
+
+        if newContent[3] == "SID" and newContent[6] == "1":
+            patientPositiveGroupSID = patientPositiveGroupSID + 1
+        if newContent[3] == "SID" and newContent[7] == "1":
+            patientPositiveGroupSID = patientPositiveGroupSID + 1
+        if newContent[3] == "SID" and newContent[8] == "1":
+            patientPositiveGroupSID = patientPositiveGroupSID + 1
+
+        if newContent[3] == "AHS" and newContent[6] == "1":
+            patientPositiveGroupAHS = patientPositiveGroupAHS + 1
+        if newContent[3] == "AHS" and newContent[7] == "1":
+            patientPositiveGroupAHS = patientPositiveGroupAHS + 1
+        if newContent[3] == "AHS" and newContent[8] == "1":
+            patientPositiveGroupAHS = patientPositiveGroupAHS + 1             
+                    
         
         counter = counter+1
 
     totalTest = str(totalTest)
+
     patientTested = str(patientTested)
+
     patientRecovered = str(patientRecovered)
+
+    patientPositiveGroupATO = str(patientPositiveGroupATO)
+    patientPositiveGroupACC = str(patientPositiveGroupACC)
+    patientPositiveGroupAEO = str(patientPositiveGroupAEO)
+    patientPositiveGroupSID = str(patientPositiveGroupSID)
+    patientPositiveGroupAHS = str(patientPositiveGroupAHS)
 
     print("Total tests : " + totalTest)
     print("Tested patients : " + patientTested)
     print("Patient recovered : " + patientRecovered)
+    print("Asymptomatic Travelled Overseas tested positive: " + patientPositiveGroupATO)
+    print("Asymptomatic Close Contact tested positive: " + patientPositiveGroupACC)
+    print("Asymptomatic Event Outbreak tested positive: " + patientPositiveGroupAEO)
+    print("Symptomatic Individuals tested positive: " + patientPositiveGroupSID)
+    print("Asymptomatic Hostpital Staffs tested positive: " + patientPositiveGroupAHS)
 
-    
-
-    #content_list = content.split(",")
     my_file.close()
-    
 
-
+# Run program    
 menu()
