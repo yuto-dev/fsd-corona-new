@@ -44,11 +44,19 @@ def modifyPatient():
     menu()
 
 def statPatient():
-    print("d")
+    #print("d")
+    getStatPatient()
     menu()
 
 def searchPatient():
     print("e")    
     menu()
-    
+
+def getStatPatient():
+    my_file = open("patient.txt", "r")
+    content = my_file.readlines()
+    print(content)
+    #content_list = content.split(",")
+    my_file.close()
+
 menu()
