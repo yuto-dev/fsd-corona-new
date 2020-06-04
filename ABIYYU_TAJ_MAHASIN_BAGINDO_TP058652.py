@@ -66,7 +66,10 @@ def getStatPatient():
     patientPositiveGroupSID = 0
     patientPositiveGroupAHS = 0
 
-    ActiveZoneCase = 0
+    ActiveCaseZoneA = 0
+    ActiveCaseZoneB = 0
+    ActiveCaseZoneC = 0
+    ActiveCaseZoneD = 0
 
     for ele in content:
         newContent = content[counter].split(";")
@@ -119,7 +122,19 @@ def getStatPatient():
         if newContent[3] == "AHS" and newContent[7] == "1":
             patientPositiveGroupAHS = patientPositiveGroupAHS + 1
         if newContent[3] == "AHS" and newContent[8] == "1":
-            patientPositiveGroupAHS = patientPositiveGroupAHS + 1             
+            patientPositiveGroupAHS = patientPositiveGroupAHS + 1   
+
+        if newContent[4] == "A" and newContent[9] != "0":
+            ActiveCaseZoneA = ActiveCaseZoneA + 1     
+
+        if newContent[4] == "B" and newContent[9] != "0":
+            ActiveCaseZoneB = ActiveCaseZoneB + 1 
+
+        if newContent[4] == "C" and newContent[9] != "0":
+            ActiveCaseZoneC = ActiveCaseZoneC + 1 
+
+        if newContent[4] == "D" and newContent[9] != "0":
+            ActiveCaseZoneD = ActiveCaseZoneD + 1                      
                     
         
         counter = counter+1
@@ -136,14 +151,28 @@ def getStatPatient():
     patientPositiveGroupSID = str(patientPositiveGroupSID)
     patientPositiveGroupAHS = str(patientPositiveGroupAHS)
 
+    ActiveCaseZoneA = str(ActiveCaseZoneA)
+    ActiveCaseZoneB = str(ActiveCaseZoneB)
+    ActiveCaseZoneC = str(ActiveCaseZoneC)
+    ActiveCaseZoneD = str(ActiveCaseZoneD)
+
     print("Total tests : " + totalTest)
+    print("")
     print("Tested patients : " + patientTested)
+    print("")
     print("Patient recovered : " + patientRecovered)
-    print("Asymptomatic Travelled Overseas tested positive: " + patientPositiveGroupATO)
-    print("Asymptomatic Close Contact tested positive: " + patientPositiveGroupACC)
-    print("Asymptomatic Event Outbreak tested positive: " + patientPositiveGroupAEO)
-    print("Symptomatic Individuals tested positive: " + patientPositiveGroupSID)
-    print("Asymptomatic Hostpital Staffs tested positive: " + patientPositiveGroupAHS)
+    print("")
+    print("Asymptomatic Travelled Overseas tested positive : " + patientPositiveGroupATO)
+    print("Asymptomatic Close Contact tested positive : " + patientPositiveGroupACC)
+    print("Asymptomatic Event Outbreak tested positive : " + patientPositiveGroupAEO)
+    print("Symptomatic Individuals tested positive : " + patientPositiveGroupSID)
+    print("Asymptomatic Hostpital Staffs tested positive : " + patientPositiveGroupAHS)
+    print("")
+    print("Active cases in Zone A : " + ActiveCaseZoneA)
+    print("Active cases in Zone B : " + ActiveCaseZoneB)
+    print("Active cases in Zone C : " + ActiveCaseZoneC)
+    print("Active cases in Zone D : " + ActiveCaseZoneD)
+    print("")
 
     my_file.close()
 
