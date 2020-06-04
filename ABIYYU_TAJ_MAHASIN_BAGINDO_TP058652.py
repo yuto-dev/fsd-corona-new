@@ -20,7 +20,7 @@ def menu():
     elif option == "3":
         modifyPatient()
     elif option == "4":
-        statPatient()
+        getStatPatient()
     elif option == "5":
         searchPatient()
     elif option == "6":
@@ -33,19 +33,23 @@ def menu():
 
 def registerPatient():
     print("a")
+    patientName = input("Enter patient name: ")
+    patientID = input("Enter patient ID: ")
+    patientMail = input("Enter patient email: ")
+    patientGroup = input("Enter patient group: ") #TODO: Print list of groups
+    patientZone = input("Enter patient zone (A, B, C, or D): ") #TODO: change lowercase groups to uppercase
+
+    patientData = patientName+";"+patientID+";"+patientMail+";"+patientGroup+";"+patientZone+";"+"N"+";"+"N"+";"+"N"+";"+"N"+";"+"0"+";"+"N"+";"+"X"
+    print(patientData)
+
+    with open("patient.txt", "a") as f:
+        print(patientData, file = f)
     
 def testPatient():
     print("b")
 
 def modifyPatient():
     print("c")
-
-def statPatient():
-    #print("d")
-    getStatPatient()
-
-def searchPatient():
-    print("e")    
 
 def getStatPatient():
     my_file = open("patient.txt", "r")
@@ -156,25 +160,29 @@ def getStatPatient():
     ActiveCaseZoneC = str(ActiveCaseZoneC)
     ActiveCaseZoneD = str(ActiveCaseZoneD)
 
-    print("Total tests : " + totalTest)
     print("")
-    print("Tested patients : " + patientTested)
+    print("Total tests: " + totalTest)
     print("")
-    print("Patient recovered : " + patientRecovered)
+    print("Tested patients: " + patientTested)
     print("")
-    print("Asymptomatic Travelled Overseas tested positive : " + patientPositiveGroupATO)
-    print("Asymptomatic Close Contact tested positive : " + patientPositiveGroupACC)
-    print("Asymptomatic Event Outbreak tested positive : " + patientPositiveGroupAEO)
-    print("Symptomatic Individuals tested positive : " + patientPositiveGroupSID)
-    print("Asymptomatic Hostpital Staffs tested positive : " + patientPositiveGroupAHS)
+    print("Patient recovered: " + patientRecovered)
     print("")
-    print("Active cases in Zone A : " + ActiveCaseZoneA)
-    print("Active cases in Zone B : " + ActiveCaseZoneB)
-    print("Active cases in Zone C : " + ActiveCaseZoneC)
-    print("Active cases in Zone D : " + ActiveCaseZoneD)
+    print("Asymptomatic Travelled Overseas tested positive: " + patientPositiveGroupATO)
+    print("Asymptomatic Close Contact tested positive: " + patientPositiveGroupACC)
+    print("Asymptomatic Event Outbreak tested positive: " + patientPositiveGroupAEO)
+    print("Symptomatic Individuals tested positive: " + patientPositiveGroupSID)
+    print("Asymptomatic Hostpital Staffs tested positive: " + patientPositiveGroupAHS)
+    print("")
+    print("Active cases in Zone A: " + ActiveCaseZoneA)
+    print("Active cases in Zone B: " + ActiveCaseZoneB)
+    print("Active cases in Zone C: " + ActiveCaseZoneC)
+    print("Active cases in Zone D: " + ActiveCaseZoneD)
     print("")
 
     my_file.close()
+
+def searchPatient():
+    print("e")    
 
 # Run program    
 menu()
