@@ -33,30 +33,52 @@ def menu():
 
 def registerPatient():
     print("a")
-    menu()
     
 def testPatient():
     print("b")
-    menu()
 
 def modifyPatient():
     print("c")
-    menu()
 
 def statPatient():
     #print("d")
     getStatPatient()
-    menu()
 
 def searchPatient():
     print("e")    
-    menu()
 
 def getStatPatient():
     my_file = open("patient.txt", "r")
     content = my_file.readlines()
     print(content)
+
+    counter = 0
+
+    patientTested = 0
+
+    for ele in content:
+        newContent = content[counter].split(";")
+        del newContent[-1]
+        print(newContent)
+        
+        if newContent[5] != "N":
+            patientTested = patientTested + 1
+
+        counter = counter+1
+
+    patientTested = str(patientTested)
+
+    print("There are " + patientTested + " patients tested")    
+
+    
+
     #content_list = content.split(",")
     my_file.close()
+
+    patientTested = 0
+    patientRecovered = 0
+    patientPositiveGroup = 0
+    ActiveZoneCase = 0
+
 
 menu()
