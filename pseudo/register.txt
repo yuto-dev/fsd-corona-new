@@ -1,0 +1,27 @@
+PROGRAM CORONA
+BEGIN
+
+PRINT "Enter patient name: "
+READ patientName
+PRINT "Enter patient ID: "
+READ patientID
+PRINT "Enter patient email: "
+READ patientMail
+PRINT "== Groups List =="
+PRINT "ATO: Asymptomatic Travelled Overseas"
+PRINT "ACC: Asymptomatic Close Contact"
+PRINT "AEO: Asymptomatic Event Outbreak"
+PRINT "SID: Symptomatic Individual"
+PRINT "AHS: Asymptomatic Hospital Staff"
+PRINT "Enter patient group: "
+READ patientGroup
+PRINT "Any past medical conditions? (A for yes, B for no): "
+READ patientCondition
+PRINT "Enter patient zone (A, B, C, or D): "
+READ patientZone
+patientData = patientName+";"+patientID+";"+patientMail+";"+patientGroup+";"+patientZone+";"+"N"+";"+"N"+";"+"N"+";"+"N"+";"+"0"+";"+"N"+";"+patientCondition+";"+"X"
+OPEN patient.txt
+    WRITE patientData
+FUNCTION exitMenu
+
+END    
