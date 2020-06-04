@@ -32,11 +32,17 @@ def menu():
 
 
 def registerPatient():
-    print("a")
+    
     patientName = input("Enter patient name: ")
     patientID = input("Enter patient ID: ")
     patientMail = input("Enter patient email: ")
-    patientGroup = input("Enter patient group: ") #TODO: Print list of groups
+    print("== Groups List ==")
+    print("ATO: Asymptomatic Travelled Overseas")
+    print("ACC: Asymptomatic Close Contact")
+    print("AEO: Asymptomatic Event Outbreak")
+    print("SID: Symptomatic Individual")
+    print("AHS: Asymptomatic Hospital Staff")
+    patientGroup = input("Enter patient group: ")
     patientZone = input("Enter patient zone (A, B, C, or D): ") #TODO: change lowercase groups to uppercase
 
     patientData = patientName+";"+patientID+";"+patientMail+";"+patientGroup+";"+patientZone+";"+"N"+";"+"N"+";"+"N"+";"+"N"+";"+"0"+";"+"N"+";"+"X"

@@ -8,4 +8,4 @@ Asep;7;asep@mail.com;SID;C;t1;0;N;N;0;N;X
 Adit;8;adit@mail.com;ATO;D;t2;0;1;N;4;D;X
 Made;9;made@mail.com;AHS;B;t3;0;0;0;0;N;X
 Anis;10;anis@mail.com;ACC;D;N;N;N;N;0;N;X
-Dummy;11;dummy@mail.com;SID;D;N;N;N;N;0;N;X
+Dummy;11;dumm@mail.com;SID;D;N;N;N;N;0;N;X
