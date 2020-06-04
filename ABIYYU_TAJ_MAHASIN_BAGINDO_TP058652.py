@@ -43,25 +43,16 @@ def registerPatient():
     print("SID: Symptomatic Individual")
     print("AHS: Asymptomatic Hospital Staff")
     patientGroup = input("Enter patient group: ")
+    patientCondition = input("Any past medical conditions? (A for yes, B for no): ")
     patientZone = input("Enter patient zone (A, B, C, or D): ") #TODO: change lowercase groups to uppercase
 
-    patientData = patientName+";"+patientID+";"+patientMail+";"+patientGroup+";"+patientZone+";"+"N"+";"+"N"+";"+"N"+";"+"N"+";"+"0"+";"+"N"+";"+"X"
+    patientData = patientName+";"+patientID+";"+patientMail+";"+patientGroup+";"+patientZone+";"+"N"+";"+"N"+";"+"N"+";"+"N"+";"+"0"+";"+"N"+";"+patientCondition+";"+"X"
     print(patientData)
 
     with open("patient.txt", "a") as f:
         print(patientData, file = f)
 
-    print("Return to menu?")
-    print("1. Return to menu")
-    print("2. Exit")
-    exitOption = input("Choose option: ")
-
-    if exitOption == "1":
-        menu()
-    elif exitOption == "2":
-        print("Goodbye and have a nice day.")
-    else:
-        print("You entered the wrong option but goodbye and have a nice day. ;)")    
+    exitMenu()    
     
 def testPatient():
     # This module handles all testing
@@ -80,16 +71,32 @@ def testPatient():
         if newContent[1] == patientID: # Patient found, things actually start to work here
             print("Testing patient " + newContent[0])
 
+            print(newContent)
+
             print("Enter test result: ")
             print("1. Positive")
             print("2. Negative")
             testResult = input("Choose option: ")
-            print(testResult)
             
-            testSolution, patientTest = testLaboratory(newContent[3],newContent[6],testResult)                  
+            patientTest, testSolution = testLaboratory(newContent[3],newContent[5],testResult)                  
 
-            print(testSolution)
-            print(patientTest)     
+            if testSolution == "QHNF" and newContent[11] == "1":
+                newSolution = "quarantine in ICU, (No follow-up test required)"
+            elif testSolution == "QHNF" and newContent[11] == "2":
+                newSolution = "quarantine in hospital normal ward, (No follow up test required)"
+            elif testSolution == "HQNF":
+                newSolution = "home quarantine, (No follow-up test required)"
+            elif testSolution == "QDFR":
+                newSolution = "quarantine in designated centres, (Follow-up test required)"
+            elif testSolution == "HQFR":
+                newSolution = "home quarantine, (Follow-up test required)" 
+            elif testSolution == "RU":
+                newSolution = "go home and reunite with family, (No follow-up test required)"
+            elif testSolution == "CW":
+                newSolution = "work, (No follow-up test required)"           
+           
+
+            print("Patient should do " + newSolution)   
 
             break
             
@@ -97,6 +104,8 @@ def testPatient():
         counter = counter + 1
         
     my_file.close()
+
+    exitMenu()
     
 def modifyPatient():
     print("c")
@@ -232,6 +241,12 @@ def getStatPatient():
 
     my_file.close()
 
+    exitMenu()
+
+def searchPatient():
+    print("e")    
+
+def exitMenu():
     print("Return to menu?")
     print("1. Return to menu")
     print("2. Exit")
@@ -244,8 +259,6 @@ def getStatPatient():
     else:
         print("You entered the wrong option but goodbye and have a nice day. ;)")
 
-def searchPatient():
-    print("e")    
 
 def testLaboratory(patientGroup, patientTest, testResult):
 
@@ -315,7 +328,7 @@ def testLaboratory(patientGroup, patientTest, testResult):
                 print("Invalid Group")
 
     elif patientTest == "t2": # Third test
-
+        
         if testResult == "1": # Third test positive
                     
             if patientGroup == "ATO":
