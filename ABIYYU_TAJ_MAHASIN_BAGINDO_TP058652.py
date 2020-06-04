@@ -29,7 +29,7 @@ def menu():
         print("Invalid option, please try again")        
         menu()        
 
-
+#TODO: Change the return to menu option into a function
 
 def registerPatient():
     # This module registers patients
@@ -65,29 +65,37 @@ def registerPatient():
     
 def testPatient():
     # This module handles all testing
-    my_file = open("patient.txt", "r")
+    my_file = open("patient.txt", "r") # Opens patient database and store in variable content as list
     content = my_file.readlines()
 
-    patientID = input("Enter patient ID: ")
+    patientID = input("Enter patient ID: ") # Prompts user to enter patient ID
 
-    counter = 0
+    counter = 0 # Set Counter
 
     for element in content:
-        newContent = content[counter].split(";")
+        newContent = content[counter].split(";") # Splits the list "content" into multiple individuals as newContent
         del newContent[-1]
         #print(newContent)
 
-        if newContent[1] == patientID:
+        if newContent[1] == patientID: # Patient found, things actually start to work here
             print("Testing patient " + newContent[0])
 
-            break
+            print("Enter test result: ")
+            print("1. Positive")
+            print("2. Negative")
+            testResult = input("Choose option: ")
+            print(testResult)
+            
+            testSolution, patientTest = testLaboratory(newContent[3],newContent[6],testResult)                  
 
-        else:
-            print("Patient not found")
-            break    
+            print(testSolution)
+            print(patientTest)     
+
+            break
+            
 
         counter = counter + 1
-
+        
     my_file.close()
     
 def modifyPatient():
@@ -238,6 +246,108 @@ def getStatPatient():
 
 def searchPatient():
     print("e")    
+
+def testLaboratory(patientGroup, patientTest, testResult):
+
+    if patientTest == "N": # First test
+                
+        if testResult == "1": # First test positive 
+                    
+            if patientGroup == "ATO":
+                testSolution = "QHNF"
+            elif patientGroup == "ACC":
+                testSolution = "QHNF"  
+            elif patientGroup == "AEO":
+                testSolution = "QHNF"
+            elif patientGroup == "SID":
+                testSolution = "QHNF"    
+            elif patientGroup == "AHS":
+                testSolution = "HQNF"
+            else:
+                print("Invalid Group")
+                
+
+        elif testResult == "2": # First test negative
+
+            if patientGroup == "ATO":
+                testSolution = "QDFR"
+            elif patientGroup == "ACC":
+                testSolution = "QDFR"  
+            elif patientGroup == "AEO":
+                testSolution = "QDFR"
+            elif patientGroup == "SID":
+                testSolution = "HQFR"    
+            elif patientGroup == "AHS":
+                testSolution = "CWFR"
+            else:
+                print("Invalid Group")
+
+    elif patientTest == "t1": # Second test
+
+        if testResult == "1": # Second test positive
+                    
+            if patientGroup == "ATO":
+                testSolution = "QHNF"
+            elif patientGroup == "ACC":
+                testSolution = "QHNF"  
+            elif patientGroup == "AEO":
+                testSolution = "QHNF"
+            elif patientGroup == "SID":
+                testSolution = "QHNF"    
+            elif patientGroup == "AHS":
+                testSolution = "HQNF"
+            else:
+                print("Invalid Group")
+
+        elif testResult == "2": # Second test negative
+
+            if patientGroup == "ATO":
+                testSolution = "QDFR"
+            elif patientGroup == "ACC":
+                testSolution = "QDFR"  
+            elif patientGroup == "AEO":
+                testSolution = "QDFR"
+            elif patientGroup == "SID":
+                testSolution = "HQFR"    
+            elif patientGroup == "AHS":
+                testSolution = "CWFR"
+            else:
+                print("Invalid Group")
+
+    elif patientTest == "t2": # Third test
+
+        if testResult == "1": # Third test positive
+                    
+            if patientGroup == "ATO":
+                testSolution = "QHNF"
+            elif patientGroup == "ACC":
+                testSolution = "QHNF"  
+            elif patientGroup == "AEO":
+                testSolution = "QHNF"
+            elif patientGroup == "SID":
+                testSolution = "QHNF"    
+            elif patientGroup == "AHS":
+                testSolution = "HQNF"
+            else:
+                print("Invalid Group")
+
+        elif testResult == "2": # Third test negative
+
+            if patientGroup == "ATO":
+                testSolution = "RU"
+            elif patientGroup == "ACC":
+                testSolution = "RU"  
+            elif patientGroup == "AEO":
+                testSolution = "RU"
+            elif patientGroup == "SID":
+                testSolution = "RU"    
+            elif patientGroup == "AHS":
+                testSolution = "CW"
+            else:
+                print("Invalid Group")
+
+    return patientTest, testSolution               
+    
 
 # Run program    
 menu()
