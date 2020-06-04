@@ -54,31 +54,42 @@ def getStatPatient():
 
     counter = 0
 
+    totalTest = 0
     patientTested = 0
+    patientRecovered = 0
+    patientPositiveGroup = 0
+    ActiveZoneCase = 0
 
     for ele in content:
         newContent = content[counter].split(";")
         del newContent[-1]
         print(newContent)
-        
+
         if newContent[5] != "N":
             patientTested = patientTested + 1
 
+        if newContent[6] != "N":
+            totalTest = totalTest + 1
+        if newContent[7] != "N":
+            totalTest = totalTest + 1
+        if newContent[8] != "N":
+            totalTest = totalTest + 1        
+        
+        
+
         counter = counter+1
 
+    totalTest = str(totalTest)
     patientTested = str(patientTested)
 
-    print("There are " + patientTested + " patients tested")    
+    print("Total tests : " + totalTest)
+    print("Tested patients : " + patientTested)
 
     
 
     #content_list = content.split(",")
     my_file.close()
-
-    patientTested = 0
-    patientRecovered = 0
-    patientPositiveGroup = 0
-    ActiveZoneCase = 0
+    
 
 
 menu()
