@@ -78,7 +78,7 @@ def testPatient():
             print("2. Negative")
             testResult = input("Choose option: ")
             
-            patientTest, testSolution = testLaboratory(newContent[3],newContent[5],testResult)                  
+            patientTest, testSolution, testResult = testLaboratory(newContent[3],newContent[5],testResult)                  
 
             if testSolution == "QHNF" and newContent[11] == "1":
                 newSolution = "quarantine in ICU, (No follow-up test required)"
@@ -96,7 +96,27 @@ def testPatient():
                 newSolution = "work, (No follow-up test required)"           
            
 
-            print("Patient should do " + newSolution)   
+            print("Patient should do " + newSolution)
+
+            if patientTest == "t1":
+                if testResult == "1":
+                    newContent[7] = "1"
+
+            if newContent[5] == "N":
+                newContent[5] = "t1"
+            elif newContent[5] == "t1":
+                newContent[5] = "t2"
+            elif newContent[5] == "t2":
+                newContent[5] = "t3"
+            else:
+                print("mampus")
+
+                
+
+            print(newContent[5])
+            print(testResult)
+
+            #newPatientData = newContent[0]+";"+       
 
             break
             
@@ -259,8 +279,10 @@ def exitMenu():
     else:
         print("You entered the wrong option but goodbye and have a nice day. ;)")
 
-
 def testLaboratory(patientGroup, patientTest, testResult):
+
+    if testResult == "2":
+        testResult = "0"
 
     if patientTest == "N": # First test
                 
@@ -280,7 +302,7 @@ def testLaboratory(patientGroup, patientTest, testResult):
                 print("Invalid Group")
                 
 
-        elif testResult == "2": # First test negative
+        elif testResult == "0": # First test negative
 
             if patientGroup == "ATO":
                 testSolution = "QDFR"
@@ -312,7 +334,7 @@ def testLaboratory(patientGroup, patientTest, testResult):
             else:
                 print("Invalid Group")
 
-        elif testResult == "2": # Second test negative
+        elif testResult == "0": # Second test negative
 
             if patientGroup == "ATO":
                 testSolution = "QDFR"
@@ -344,7 +366,7 @@ def testLaboratory(patientGroup, patientTest, testResult):
             else:
                 print("Invalid Group")
 
-        elif testResult == "2": # Third test negative
+        elif testResult == "0": # Third test negative
 
             if patientGroup == "ATO":
                 testSolution = "RU"
@@ -359,7 +381,10 @@ def testLaboratory(patientGroup, patientTest, testResult):
             else:
                 print("Invalid Group")
 
-    return patientTest, testSolution               
+    return patientTest, testSolution, testResult               
+    
+def modifyFeatureA():
+    a = 0
     
 
 # Run program    
