@@ -175,7 +175,7 @@ def modifyPatient():
     elif option == "3":
         menu()
     else:
-        print("wrong option, please choose from the")
+        print("Wrong option, please choose from the")
         modifyPatient()        
 
 def getStatPatient():
@@ -312,7 +312,24 @@ def getStatPatient():
     exitMenu()
 
 def searchPatient():
-    print("e")    
+    print("Available options")
+    print("1. Patient records")
+    print("2. Case status")
+    print("3. Deceased patient records")
+    print("4. Return to main menu")
+    option = input("Choose option: ")
+
+    if option == "1":
+        searchFeatureA()
+    elif option == "2":
+        searchFeatureB()
+    elif option == "3":
+        searchFeatureC()
+    elif option == "4":
+        menu()    
+    else:
+        print("Wrong option, please choose from the")
+        modifyPatient()    
 
 def exitMenu():
     print("Return to menu?")
@@ -543,6 +560,104 @@ def modifyFeatureB():
             break
 
     counter = counter + 1    
+
+def searchFeatureA():
+    my_file = open("patient.txt", "r")
+    content = my_file.readlines()
+
+    print("Available options")
+    print("1.Search by name")
+    print("2.Search by ID")
+    option = input("Choose option: ")
+
+    if option == "1":
+        patientName = input("Enter patient name (case sensitive): ")
+
+        counter = 0
+
+        for element in content:
+
+            newContent = content[counter].split(";") # Splits the list "content" into multiple individuals as newContent
+            del newContent[-1]
+            #print(newContent)
+
+            if newContent[0] == patientName: # Patient found, things actually start to work here
+
+                if newContent[10] == "N":
+                    status = "Healthy"
+                elif newContent[10] == "A":
+                    status = "Infected"
+                elif newContent[10] == "R":
+                    status = "Recovered"
+                elif newContent[10] == "D":
+                    status = "Deceased"
+                else:
+                    status = "status not found"
+
+                if newContent[11] == "1":
+                    cond = "Yes"
+                elif newContent[11] == "2":
+                    cond = "No"
+                else:
+                    print("condition not found")        
+
+                print("Patient name: " + newContent[0])
+                print("Patient ID: " + newContent[1])
+                print("Patient mail: " + newContent[2])
+                print("Patient group: " + newContent[3])
+                print("Patient zone: " + newContent[4])
+                print("Patient status: " + status)
+                print("Have any past medical condition: " + cond)
+
+        counter = counter + 1
+
+    elif option == "2":
+
+        patientID = input("Enter patient ID: ")
+
+        counter = 0
+
+        for element in content:
+
+            newContent = content[counter].split(";") # Splits the list "content" into multiple individuals as newContent
+            del newContent[-1]
+            #print(newContent)
+
+            if newContent[1] == patientID: # Patient found, things actually start to work here
+
+                if newContent[10] == "N":
+                    status = "Healthy"
+                elif newContent[10] == "A":
+                    status = "Infected"
+                elif newContent[10] == "R":
+                    status = "Recovered"
+                elif newContent[10] == "D":
+                    status = "Deceased"
+                else:
+                    status = "status not found"
+
+                if newContent[11] == "1":
+                    cond = "Yes"
+                elif newContent[11] == "2":
+                    cond = "No"
+                else:
+                    print("condition not found")        
+
+                print("Patient name: " + newContent[0])
+                print("Patient ID: " + newContent[1])
+                print("Patient mail: " + newContent[2])
+                print("Patient group: " + newContent[3])
+                print("Patient zone: " + newContent[4])
+                print("Patient status: " + status)
+                print("Have any past medical condition: " + cond)
+
+        counter = counter + 1
+
+def searchFeatureB():
+    a = 0
+
+def searchFeatureC():
+    a = 0        
 
 # Run program    
 menu()
