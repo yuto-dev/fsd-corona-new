@@ -11,3 +11,4 @@ Anis;10;anis@mail.com;ACC;D;F;0;1;N;5;A;1;X
 Dummy;11;dummy@mail.com;SID;D;N;N;N;N;0;N;2;X
 Nise;12;nise@mail.com;AHS;B;N;N;N;N;0;N;2;X
 Neue;13;neue@mail.com;ACC;D;N;N;N;N;0;N;2;X
+Chee;14;chee@mail.com;ACC;C;F;0;1;N;6;R;2;X
