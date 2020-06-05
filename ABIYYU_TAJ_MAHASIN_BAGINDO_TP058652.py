@@ -609,6 +609,8 @@ def searchFeatureA():
                 print("Patient status: " + status)
                 print("Have any past medical condition: " + cond)
 
+                exitMenu()
+
         counter = counter + 1
 
     elif option == "2":
@@ -651,10 +653,39 @@ def searchFeatureA():
                 print("Patient status: " + status)
                 print("Have any past medical condition: " + cond)
 
+                exitMenu()
+
         counter = counter + 1
 
 def searchFeatureB():
-    a = 0
+    my_file = open("patient.txt", "r")
+    content = my_file.readlines()
+
+    caseID = input("Enter case ID: ") # Prompts user to enter patient ID
+
+    counter = 0 # Set Counter
+
+    for element in content:
+        newContent = content[counter].split(";") # Splits the list "content" into multiple individuals as newContent
+        del newContent[-1]
+        #print(newContent)
+
+        if newContent[9] == caseID: # Patient found, things actually start to work here
+            
+            if newContent[10] == "A":
+                status = "Active"
+            elif newContent[10] == "R":
+                status = "Recovered"
+            elif newContent[10] == "D":
+                status = "Deceased"
+            else:
+                status = "status not found"            
+            
+            print("Patient status for case " + newContent[9] + " is " + status)
+
+            exitMenu()
+
+        counter = counter + 1            
 
 def searchFeatureC():
     a = 0        
