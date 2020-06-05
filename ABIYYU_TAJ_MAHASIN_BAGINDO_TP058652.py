@@ -78,7 +78,7 @@ def testPatient():
             print("2. Negative")
             testResult = input("Choose option: ")
             
-            patientTest, testSolution, testResult = testLaboratory(newContent[3],newContent[5],testResult)                  
+            patientTest, testSolution, testResult, positive = testLaboratory(newContent[3],newContent[5],testResult)                  
 
             if testSolution == "QHNF" and newContent[11] == "1":
                 newSolution = "quarantine in ICU, (No follow-up test required)"
@@ -98,23 +98,57 @@ def testPatient():
 
             print("Patient should do " + newSolution)
 
-            if patientTest == "t1":
+            if patientTest == "N":
                 if testResult == "1":
+                    newContent[5] = "F"
+                    newContent[6] = "1"
+                    newContent[9] = input("Enter case ID: ")
+                    newContent[10] = "A"
+                elif testResult == "0":
+                    newContent[5] = "t1"
+                    newContent[6] = "0"
+                else:
+                    print("Incorrect test result, returning to main menu")
+                    menu()
+            elif patientTest == "t1":
+                if testResult == "1":
+                    newContent[5] = "F"
                     newContent[7] = "1"
+                    newContent[9] = input("Enter case ID: ")
+                    newContent[10] = "A"
+                elif testResult == "0":
+                    newContent[5] = "t2"
+                    newContent[7] = "0"
+                else:
+                    print("Incorrect test result, returning to main menu")
+                    menu()
+            elif patientTest == "t2":
+                if testResult == "1":
+                    newContent[5] = "F"
+                    newContent[8] = "1"
+                    newContent[9] = input("Enter case ID: ")
+                    newContent[10] = "A"
+                elif testResult == "0":
+                    newContent[5] = "t3"
+                    newContent[8] = "0"
+                else:
+                    print("Incorrect test result, returning to main menu")
+                    menu()
 
-            if newContent[5] == "N":
-                newContent[5] = "t1"
-            elif newContent[5] == "t1":
-                newContent[5] = "t2"
-            elif newContent[5] == "t2":
-                newContent[5] = "t3"
-            else:
-                print("mampus")
+            newPatientData = patientBuilder(newContent)
+            
+            newIndex = int(newContent[1]) - 1
+            content[newIndex] = newPatientData
 
-                
+            f = open("patient.txt", "w")
+            counterIn = 0
+            for items in content:
+                f.writelines(content[counterIn])
+                counterIn = counterIn + 1
+            f.close()
+                #open and read the file after the appending:
+            f = open("patient.txt", "r")          
 
-            print(newContent[5])
-            print(testResult)
 
             #newPatientData = newContent[0]+";"+       
 
@@ -128,7 +162,21 @@ def testPatient():
     exitMenu()
     
 def modifyPatient():
-    modifyFeatureA()
+    print("Available options")
+    print("1. Set all non-active positive patients' status to positive")
+    print("2. Modify patient status")
+    print("3. Return to main menu")
+    option = input("Choose option: ")
+
+    if option == "1":
+        modifyFeatureA()
+    elif option == "2":
+        modifyFeatureB()
+    elif option == "3":
+        menu()
+    else:
+        print("wrong option, please choose from the")
+        modifyPatient()        
 
 def getStatPatient():
     #This module displays the requested statistics
@@ -279,6 +327,10 @@ def exitMenu():
     else:
         print("You entered the wrong option but goodbye and have a nice day. ;)")
 
+def patientBuilder(patient):
+    patientData = patient[0] +";"+ patient[1] +";"+ patient[2] +";"+ patient[3] +";"+ patient[4]+";"+patient[5]+";"+patient[6]+";"+patient[7]+";"+patient[8]+";"+patient[9]+";"+patient[10]+";"+patient[11]+";"+"X\n"
+    return patientData
+
 def testLaboratory(patientGroup, patientTest, testResult):
 
     if testResult == "2":
@@ -300,6 +352,8 @@ def testLaboratory(patientGroup, patientTest, testResult):
                 testSolution = "HQNF"
             else:
                 print("Invalid Group")
+
+            positive = 1    
                 
 
         elif testResult == "0": # First test negative
@@ -316,6 +370,8 @@ def testLaboratory(patientGroup, patientTest, testResult):
                 testSolution = "CWFR"
             else:
                 print("Invalid Group")
+
+            positive = 0    
 
     elif patientTest == "t1": # Second test
 
@@ -334,6 +390,8 @@ def testLaboratory(patientGroup, patientTest, testResult):
             else:
                 print("Invalid Group")
 
+            positive = 1     
+
         elif testResult == "0": # Second test negative
 
             if patientGroup == "ATO":
@@ -348,6 +406,8 @@ def testLaboratory(patientGroup, patientTest, testResult):
                 testSolution = "CWFR"
             else:
                 print("Invalid Group")
+
+            positive = 0    
 
     elif patientTest == "t2": # Third test
         
@@ -366,6 +426,8 @@ def testLaboratory(patientGroup, patientTest, testResult):
             else:
                 print("Invalid Group")
 
+            positive = 1     
+
         elif testResult == "0": # Third test negative
 
             if patientGroup == "ATO":
@@ -381,7 +443,15 @@ def testLaboratory(patientGroup, patientTest, testResult):
             else:
                 print("Invalid Group")
 
-    return patientTest, testSolution, testResult               
+            positive = 0
+
+    else:
+        print("No tests required for this patient, returning to main menu")
+        testSolution = 0
+        positive = 0
+        menu()            
+
+    return patientTest, testSolution, testResult, positive               
     
 def modifyFeatureA():
     my_file = open("patient.txt", "r")
@@ -405,7 +475,8 @@ def modifyFeatureA():
             if newContent[10] == "N":
                 newContent[10] = "A"
 
-        newPatientData = newContent[0]+";"+newContent[1]+";"+newContent[2]+";"+newContent[3]+";"+newContent[4]+";"+newContent[5]+";"+newContent[6]+";"+newContent[7]+";"+newContent[8]+";"+newContent[9]+";"+newContent[10]+";"+newContent[11]+";"+"X\n"
+        newPatientData = patientBuilder(newContent)
+
         print(newPatientData)
 
         newIndex = int(newContent[1]) - 1
@@ -419,11 +490,59 @@ def modifyFeatureA():
         f.close()
             #open and read the file after the appending:
         f = open("patient.txt", "r")
-        print(f.read())
 
 
         counter = counter + 1
 
+    print("All active patients' status has been changed to Active!")
+
+    exitMenu()    
+
+def modifyFeatureB():
+    my_file = open("patient.txt", "r")
+    content = my_file.readlines()
+
+    patientID = input("Enter patient ID: ") # Prompts user to enter patient ID
+
+    counter = 0 # Set Counter
+
+    for element in content:
+        newContent = content[counter].split(";") # Splits the list "content" into multiple individuals as newContent
+        del newContent[-1]
+        #print(newContent)
+
+        if newContent[1] == patientID: # Patient found, things actually start to work here
+            print("Modify patient " + newContent[0] + "'s status to?")
+            print("1. Recovered")
+            print("2. Deceased")
+            print("3. Go back to the main menu")
+            option = input("Choose option: ")
+
+            if option == "1":
+                newContent[10] = "R"
+            elif option == "2":
+                newContent[10] = "D"
+            elif option == "3":
+                menu()
+
+            newPatientData = patientBuilder(newContent)
+
+            newIndex = int(newContent[1]) - 1
+
+            content[newIndex] = newPatientData
+
+            f = open("patient.txt", "w")
+            counterIn = 0
+            for items in content:
+                f.writelines(content[counterIn])
+                counterIn = counterIn + 1
+            f.close()
+                #open and read the file after the appending:
+            f = open("patient.txt", "r")
+
+            break
+
+    counter = counter + 1    
 
 # Run program    
 menu()

@@ -11,3 +11,5 @@ Anis;10;anis@mail.com;ACC;D;N;N;N;N;0;N;1;X
 Dummy;11;dummy@mail.com;SID;D;N;N;N;N;0;N;2;X
 Nise;12;nise@mail.com;AHS;B;N;N;N;N;0;N;2;X
 Neue;13;neue@mail.com;ACC;D;N;N;N;N;0;N;2;X
+
+newPatientData = newContent[0]+";"+newContent[1]+";"+newContent[2]+";"+newContent[3]+";"+newContent[4]+";"+newContent[5]+";"+newContent[6]+";"+newContent[7]+";"+newContent[8]+";"+newContent[9]+";"+newContent[10]+";"+newContent[11]+";"+"X\n"
