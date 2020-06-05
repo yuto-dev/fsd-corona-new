@@ -688,7 +688,36 @@ def searchFeatureB():
         counter = counter + 1            
 
 def searchFeatureC():
-    a = 0        
+    my_file = open("patient.txt", "r")
+    content = my_file.readlines()
+
+    counter = 0 # Set Counter
+
+    for element in content:
+        newContent = content[counter].split(";") # Splits the list "content" into multiple individuals as newContent
+        del newContent[-1]
+
+        if newContent[10] == "R":
+
+            if newContent[11] == "1":
+                cond = "Yes"
+            elif newContent[11] == "2":
+                cond = "No"
+            else:
+                print("condition not found")        
+
+            print("---------------------------------")
+            print("Patient name: " + newContent[0])
+            print("Patient ID: " + newContent[1])
+            print("Patient mail: " + newContent[2])
+            print("Patient group: " + newContent[3])
+            print("Patient zone: " + newContent[4])
+            print("Patient case ID: " + newContent[9])
+            print("Have any past medical condition: " + cond)
+            print("---------------------------------")
+
+        counter = counter + 1            
+    exitMenu()
 
 # Run program    
 menu()
