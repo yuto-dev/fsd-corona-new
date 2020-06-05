@@ -128,7 +128,7 @@ def testPatient():
     exitMenu()
     
 def modifyPatient():
-    print("c")
+    modifyFeatureA()
 
 def getStatPatient():
     #This module displays the requested statistics
@@ -384,8 +384,46 @@ def testLaboratory(patientGroup, patientTest, testResult):
     return patientTest, testSolution, testResult               
     
 def modifyFeatureA():
-    a = 0
-    
+    my_file = open("patient.txt", "r")
+    content = my_file.readlines()
+
+    counter = 0 # Set Counter
+
+    for element in content:
+        newContent = content[counter].split(";") # Splits the list "content" into multiple individuals as newContent
+        del newContent[-1]
+
+        
+        print(newContent)
+        if newContent[6] == "1":
+            if newContent[10] == "N":
+                newContent[10] = "A"
+        if newContent[7] == "1":
+            if newContent[10] == "N":
+                newContent[10] = "A"
+        if newContent[8] == "1":
+            if newContent[10] == "N":
+                newContent[10] = "A"
+
+        newPatientData = newContent[0]+";"+newContent[1]+";"+newContent[2]+";"+newContent[3]+";"+newContent[4]+";"+newContent[5]+";"+newContent[6]+";"+newContent[7]+";"+newContent[8]+";"+newContent[9]+";"+newContent[10]+";"+newContent[11]+";"+"X\n"
+        print(newPatientData)
+
+        newIndex = int(newContent[1]) - 1
+        content[newIndex] = newPatientData
+
+        f = open("patient.txt", "w")
+        counterIn = 0
+        for items in content:
+            f.writelines(content[counterIn])
+            counterIn = counterIn + 1
+        f.close()
+            #open and read the file after the appending:
+        f = open("patient.txt", "r")
+        print(f.read())
+
+
+        counter = counter + 1
+
 
 # Run program    
 menu()
