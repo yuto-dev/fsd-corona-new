@@ -156,11 +156,7 @@ def testPatient():
             for items in content:
                 f.writelines(content[counterIn])
                 counterIn = counterIn + 1
-            f.close()
-                         
-
-
-            #newPatientData = newContent[0]+";"+       
+            f.close()     
 
             break
             
@@ -175,7 +171,7 @@ def modifyPatient():
     # This module executes different functions that modify
     # patient data based on user input.
     print("Available options")
-    print("1. Set all non-active positive patients' status to positive")
+    print("1. Set all non-active positive patients' status to active")
     print("2. Modify patient status")
     print("3. Return to main menu")
     option = input("Choose option: ")
@@ -194,11 +190,10 @@ def getStatPatient():
     #This module displays all the requested statistics by the assignment question.
     my_file = open("patient.txt", "r")
     content = my_file.readlines()
-    print(content)
 
-    counter = 0
+    counter = 0 # Initialize counter
 
-    # Initializes variables.
+    # Initialize variables.
     totalTest = 0
 
     patientTested = 0
@@ -220,7 +215,6 @@ def getStatPatient():
     for element in content:
         newContent = content[counter].split(";")
         del newContent[-1]
-        print(newContent)
         # Amount of patient tested increases when the index 5
         # of a patient shows that it has been tested.
         if newContent[5] != "N":
@@ -314,13 +308,13 @@ def getStatPatient():
     ActiveCaseZoneB = str(ActiveCaseZoneB)
     ActiveCaseZoneC = str(ActiveCaseZoneC)
     ActiveCaseZoneD = str(ActiveCaseZoneD)
-    # Concatenate all data and print all data. 
+    # Concatenate and print all data. 
     print("")
     print("Total tests: " + totalTest)
     print("")
     print("Tested patients: " + patientTested)
     print("")
-    print("Patient recovered: " + patientRecovered)
+    print("Patients recovered: " + patientRecovered)
     print("")
     print("Asymptomatic Travelled Overseas tested positive: " + patientPositiveGroupATO)
     print("Asymptomatic Close Contact tested positive: " + patientPositiveGroupACC)
@@ -368,7 +362,7 @@ def exitMenu():
     # to the main menu or exit the program.
     print("Return to menu?")
     print("1. Return to menu")
-    print("2. Exit")
+    print("2. Exit program")
     exitOption = input("Choose option: ")
 
     if exitOption == "1":
@@ -619,6 +613,7 @@ def searchFeatureA():
     print("Available options")
     print("1.Search by name")
     print("2.Search by ID")
+    print("3.Go back to the main menu")
     option = input("Choose option: ")
     # If user chooses name.
     if option == "1":
@@ -650,7 +645,7 @@ def searchFeatureA():
                 elif newContent[11] == "2":
                     cond = "No"
                 else:
-                    print("condition not found")        
+                    cond = "condition not found"        
                 # Prints patient record.
                 print("---------------------------------")
                 print("Patient name: " + newContent[0])
@@ -695,7 +690,7 @@ def searchFeatureA():
                 elif newContent[11] == "2":
                     cond = "No"
                 else:
-                    print("condition not found")        
+                    cond = "condition not found"        
                 # print user records.
                 print("---------------------------------")
                 print("Patient name: " + newContent[0])
@@ -710,6 +705,8 @@ def searchFeatureA():
                 exitMenu()
 
             counter = counter + 1
+    elif option == "3":
+        menu()        
 
 def searchFeatureB():
     # Second feature, allows user to search for
@@ -770,7 +767,7 @@ def searchFeatureC():
             elif newContent[11] == "2":
                 cond = "No"
             else:
-                print("condition not found")        
+                cond = "condition not found"        
             # print records
             print("---------------------------------")
             print("Patient name: " + newContent[0])
@@ -786,7 +783,7 @@ def searchFeatureC():
     # exit prompt            
     exitMenu()
 
-# Run program    
+# Run program!    
 menu()
 
 #成功だ！
