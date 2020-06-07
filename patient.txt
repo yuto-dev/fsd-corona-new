@@ -12,3 +12,7 @@ Dummy;11;dummy@mail.com;SID;D;N;N;N;N;0;N;2;X
 Nise;12;nise@mail.com;AHS;B;N;N;N;N;0;N;2;X
 Neue;13;neue@mail.com;ACC;D;N;N;N;N;0;N;2;X
 Chee;14;chee@mail.com;ACC;C;F;0;1;N;6;R;2;X
+Flandre;15;flandre@mail.com;AHS;A;N;N;N;N;0;N;2;X
+Cirno;16;cirno@mail.com;AEO;C;N;N;N;N;0;N;2;X
+Reimu;17;reimu@mail.com;ATO;A;N;N;N;N;0;N;2;X
+Iflah;18;iflah@mail.com;SID;A;F;1;N;N;7;D;1;X
