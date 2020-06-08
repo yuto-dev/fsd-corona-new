@@ -406,7 +406,6 @@ def testLaboratory(patientGroup, patientTest, testResult):
                             # I want to delete it but I don't want to risk ruining the whole program.
                             # "If it works don't touch anything."
                 
-
         elif testResult == "0": # First test negative
 
             if patientGroup == "ATO":
