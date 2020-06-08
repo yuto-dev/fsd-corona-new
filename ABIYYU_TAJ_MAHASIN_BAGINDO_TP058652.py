@@ -784,5 +784,3 @@ def searchFeatureC():
 
 # Run program!    
 menu()
-
-#成功だ！
